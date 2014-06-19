@@ -66,8 +66,10 @@ Use `heat output-show <OUTPUT NAME>` to get the value fo a specific output.
 
 * `private_key`: SSH private that can be used to login as root to the server.
 * `server_ip`: Public IP address of the cloud server
-* `strongloop_username`: Username to use when logging into StrongLoop
-* `strongloop_password`: Password to use when logging into StrongLoop
+* `strongloop_username`: Username to use when logging in via SSH to StrongLoop
+  server.
+* `strongloop_password`: Password to use with `strongloop_username` when
+  logging in via SSH.
 * `strongloop_url`: URL to use when navigating to the StrongLoop installation
 
 For multi-line values, the response will come in an escaped form. To get rid of
