@@ -33,7 +33,7 @@ parameters:
       description: Must be a supported operating system.
 
   flavor:
-    Label: Server Size
+    label: Server Size
     description: Rackspace Cloud Server flavor
     type: string
     default: 2 GB Performance
@@ -94,7 +94,7 @@ resources:
     properties:
       username: root
       private_key: { get_attr: [ssh_key, private_key] }
-      host: { get_attr: [strongloop, accessIPv4] }
+      host: { get_attr: [strongloop_server, accessIPv4] }
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       node:
