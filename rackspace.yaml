@@ -1,0 +1,73 @@
+schema-version: 1.0.0
+application-family: Miscellaneous
+application-name: StrongLoop
+application-version: latest
+flavor: Single Linux server with StrongLoop Suite
+flavor-weight: 1
+reach-info:
+  icon-20x20: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/strongloop-icon-20x20.png
+  tattoo: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/strongloop-tattoo.png
+hidden_outputs:
+  - private_key
+  - strongloop_password
+abstract: |
+  [StrongLoop](http://strongloop.com) Suite is a modern app platform with
+  Node.js, NPM and, tooling for use in production. Backed by professional
+  support plans from StrongLoop.
+instructions: |
+  #### Getting Started
+  This deployment provides a single Linux server with Node.js and the
+  StrongLoop command-line tool installed.
+
+  Once the deployment is complete, the LoopBack sample application is available
+  in the sls-sample-app sub-directory of your home directory. To access the
+  sample application, navigate to the IP address of the server on port 3000
+  (for example, https://1.2.3.4:3000). For more information, see the [LoopBack
+  documentation](http://docs.strongloop.com/display/DOC/LoopBack).
+
+  To create your own application, SSH to the server using the user and password
+  provided and follow the guides below. See
+  [docs.strongloop.com](http://docs.strongloop.com/) for more information about
+  StrongLoop Suite. Additionally, the private key provided in the passwords
+  section can be used to login as root via SSH. For information on how to use
+  SSH keys, please see these tutorials for [Mac OS X and
+  Linux](http://www.rackspace.com/knowledge_center/article/logging-in-with-a-ssh-private-key-on-linuxmac)
+  and [Windows using
+  PuTTY](http://www.rackspace.com/knowledge_center/article/logging-in-with-a-ssh-private-key-on-windows).
+
+  ##### StrongLoop
+  [StrongLoop](http://strongloop.com/) provides an API tier for connecting
+  enterprise data to devices and browsers. StrongLoop Suite comes with a
+  private mBaaS, an operations and performance monitoring console, a
+  command-line tool and technical support from Node experts.
+
+  LoopBack is an open-source mobile backend framework built on Node.js that
+  enables you to connect mobile applications to your data. You can run LoopBack
+  on-premises or in the cloud. StrongLoop offers support, training and
+  professional services for LoopBack. StrongOps provides real-time performance
+  monitoring and operational support for Node.js applications with CPU
+  profiling, event loop inspection, and more.
+
+  ##### Getting started with the LoopBack sample app
+  For more information see [Getting
+  Started](http://docs.strongloop.com/display/DOC/Getting+started#Gettingstarted-CreateyourfirstLoopBackapplication)
+
+  ```
+  slc lb example
+  slc cd sls-sample-app
+  slc run .
+  ```
+
+  ##### Getting started with LoopBack from scratch
+  For more information see [Creating a LoopBack
+  Application](http://docs.strongloop.com/display/DOC/Creating+a+LoopBack+application)
+
+  ```
+  mkdir myLoopBackProject
+  cd myLoopBackProject
+  slc project myLoopBackApp
+  slc lb model products
+  slc lb model customers
+  slc lb model stores
+  slc lb model cars
+  ```

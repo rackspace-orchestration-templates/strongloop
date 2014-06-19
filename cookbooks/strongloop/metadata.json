@@ -1,0 +1,37 @@
+{
+  "name": "strongloop",
+  "version": "0.1.4",
+  "description": "Installs/Configures StrongLoop",
+  "long_description": "",
+  "maintainer": "Rackspace Hosting",
+  "maintainer_email": "ryan.walker@rackspace.com",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+    "apt": ">= 0.0.0",
+    "build-essential": ">= 0.0.0",
+    "firewall": ">= 0.0.0",
+    "nginx": ">= 0.0.0",
+    "nodejs": ">= 0.0.0",
+    "npm": ">= 0.0.0",
+    "openssl": ">= 0.0.0",
+    "supervisor": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  }
+}
