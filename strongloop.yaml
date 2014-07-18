@@ -10,6 +10,7 @@ parameter_groups:
   parameters:
   - flavor
   - image
+  - install_redis
 
 - label: rax-dev-params
   # These are parameters that will not be displayed in the portal. The purpose
@@ -55,6 +56,12 @@ parameters:
       description: |
         Must be a valid Rackspace Cloud Server flavor for the region you have
         selected to deploy into.
+
+  install_redis:
+    label: Install Redis
+    description: If selected, this will install a local installation of Redis.
+    type: boolean
+    default: false
 
   kitchen:
     description: URL for the kitchen to use
@@ -102,9 +109,12 @@ resources:
           databag_name: secrets
           npm_pkgs: ['redis']
           username: strongloop
+        redis-helper:
+          run: { get_param: install_redis }
         run_list: ["recipe[apt]",
                    "recipe[strongloop]",
-                   "recipe[strongloop::firewall]"]
+                   "recipe[strongloop::firewall]",
+                   "recipe[redis-helper]"]
       data_bags:
         secrets:
           encrypted: true
