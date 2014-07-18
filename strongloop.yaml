@@ -109,6 +109,12 @@ resources:
           databag_name: secrets
           npm_pkgs: ['redis']
           username: strongloop
+        redisio:
+          default_settings:
+            address: localhost
+          servers:
+            - name: redis
+              port: 6379
         redis-helper:
           run: { get_param: install_redis }
         run_list: ["recipe[apt]",
