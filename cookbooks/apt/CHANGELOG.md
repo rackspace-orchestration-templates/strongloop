@@ -2,6 +2,22 @@ apt Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the apt cookbook.
 
+v2.5.2 (2014-08-14)
+-------------------
+- Fully restore fully restore 2.3.10 behaviour
+
+v2.5.1 (2014-08-14)
+-------------------
+- fix breakage introduced in apt 2.5.0
+
+v2.5.0 (2014-08-12)
+-------------------
+- Add unattended-upgrades recipe
+- Only update the cache for the created repository
+- Added ChefSpec matchers and default_action for resources
+- Avoid cloning resource attributes
+- Minor documentation updates
+
 v2.4.0 (2014-05-15)
 -------------------
 - [COOK-4534]: Add option to update apt cache at compile time
