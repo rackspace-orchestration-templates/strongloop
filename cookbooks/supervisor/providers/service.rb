@@ -40,11 +40,13 @@ action :start do
     raise "Supervisor service #{new_resource.name} cannot be started because it does not exist"
   when 'RUNNING'
     Chef::Log.debug "#{ new_resource } is already started."
+  when 'STARTING'
+    Chef::Log.debug "#{ new_resource } is already starting."
+    wait_til_state("RUNNING")
   else
     converge_by("Starting #{ new_resource }") do
-      result = supervisorctl('start')
-      if !result.match(/#{new_resource.name}: started$/)
-        raise "Supervisor service #{new_resource.name} was unable to be started: #{result}"
+      if not supervisorctl('start')
+        raise "Supervisor service #{new_resource.name} was unable to be started"
       end
     end
   end
@@ -56,11 +58,13 @@ action :stop do
     raise "Supervisor service #{new_resource.name} cannot be stopped because it does not exist"
   when 'STOPPED'
     Chef::Log.debug "#{ new_resource } is already stopped."
+  when 'STOPPING'
+    Chef::Log.debug "#{ new_resource } is already stopping."
+    wait_til_state("STOPPED")
   else
     converge_by("Stopping #{ new_resource }") do
-      result = supervisorctl('stop')
-      if !result.match(/#{new_resource.name}: stopped$/)
-        raise "Supervisor service #{new_resource.name} was unable to be stopped: #{result}"
+      if not supervisorctl('stop')
+        raise "Supervisor service #{new_resource.name} was unable to be stopped"
       end
     end
   end
@@ -72,21 +76,20 @@ action :restart do
     raise "Supervisor service #{new_resource.name} cannot be restarted because it does not exist"
   else
     converge_by("Restarting #{ new_resource }") do
-      result = supervisorctl('restart')
-      if !result.match(/^#{new_resource.name}: started$/)
-        raise "Supervisor service #{new_resource.name} was unable to be started: #{result}"
+      if not supervisorctl('restart')
+        raise "Supervisor service #{new_resource.name} was unable to be started"
       end
     end
   end
 end
 
 def enable_service
-  execute "supervisorctl update" do
+  e = execute "supervisorctl update" do
     action :nothing
     user "root"
   end
 
-  template "#{node['supervisor']['dir']}/#{new_resource.service_name}.conf" do
+  t = template "#{node['supervisor']['dir']}/#{new_resource.service_name}.conf" do
     source "program.conf.erb"
     cookbook "supervisor"
     owner "root"
@@ -94,6 +97,11 @@ def enable_service
     mode "644"
     variables :prog => new_resource
     notifies :run, "execute[supervisorctl update]", :immediately
+  end
+
+  t.run_action(:create)
+  if t.updated?
+    e.run_action(:run)
   end
 end
 
@@ -110,36 +118,47 @@ def disable_service
 end
 
 def supervisorctl(action)
-  cmd = "supervisorctl #{action} #{cmd_line_args}"
+  cmd = "supervisorctl #{action} #{cmd_line_args} | grep -v ERROR"
   result = Mixlib::ShellOut.new(cmd).run_command
-  result.stdout.rstrip
+  # Since we append grep to the command
+  # The command will have an exit code of 1 upon failure
+  # So 0 here means it was successful
+  result.exitstatus == 0
 end
 
 def cmd_line_args
   name = new_resource.service_name
-  if new_resource.numprocs > 1
+  if new_resource.process_name != '%(program_name)s'
     name += ':*'
   end
   name
 end
 
 def get_current_state(service_name)
-  cmd = "supervisorctl status #{service_name}"
-  result = Mixlib::ShellOut.new(cmd).run_command
-  stdout = result.stdout
-  if stdout.include? "No such process #{service_name}"
+  result = Mixlib::ShellOut.new("supervisorctl status").run_command
+  match = result.stdout.match("(^#{service_name}(\\:\\S+)?\\s*)([A-Z]+)(.+)")
+  if match.nil?
     "UNAVAILABLE"
   else
-    match = stdout.match("(^#{service_name}\\s*)([A-Z]+)(.+)")
-    if match.nil?
-      raise "The supervisor service is not running as expected. " \
-              "The command '#{cmd}' output:\n----\n#{stdout}\n----"
-    end
-    match[2]
+    match[3]
   end
 end
 
 def load_current_resource
   @current_resource = Chef::Resource::SupervisorService.new(@new_resource.name)
   @current_resource.state = get_current_state(@new_resource.name)
+end
+
+def wait_til_state(state,max_tries=20)
+  service = new_resource.service_name
+
+  max_tries.times do
+    return if get_current_state(service) == state
+
+    Chef::Log.debug("Waiting for service #{service} to be in state #{state}")
+    sleep 1
+  end
+
+  raise "service #{service} not in state #{state} after #{max_tries} tries"
+
 end

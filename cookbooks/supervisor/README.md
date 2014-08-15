@@ -6,7 +6,7 @@ Installs (Python) supervisor and provides resources to configure services
 Requirements
 ------------
 ### Platforms
-Tested on Ubuntu 10.04
+Supports Debian and RHEL based systems. Tested on Ubuntu 12.04, 10.04, CentOS 6.5.
 
 ### Cookbooks
 - python
@@ -25,6 +25,7 @@ Attributes
 - `node['supervisor']['minfds']` - The minimum number of file descriptors that must be available before supervisord will start successfully.
 - `node['supervisor']['minprocs']` - The minimum number of process descriptors that must be available before supervisord will start successfully.
 - `node['supervisor']['version']` - Sets the version of supervisor to install, must be 3.0+ to use minprocs and minfds.
+- `node['supervisor']['socket_file']` - location of supervisor socket file.
 
 
 Resources/Providers
@@ -98,6 +99,8 @@ License & Authors
 -----------------
 - Author:: Noah Kantrowitz <noah@opscode.com>
 - Author:: Gilles Devaux <gilles.devaux@gmail.com>
+- Author:: Sam Clements <sam.clements@datasift.com>
+- Author:: Chris Jerdonek <chris.jerdonek@gmail.com>
 
 ```text
 Copyright:: 2011-2012, Opscode, Inc <legal@opscode.com>
