@@ -109,6 +109,7 @@ resources:
           databag_name: secrets
           npm_pkgs: ['redis']
           username: strongloop
+          project_name: loopback-example-app
         redisio:
           default_settings:
             address: localhost
