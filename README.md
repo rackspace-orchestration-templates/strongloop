@@ -83,7 +83,7 @@ This deployment provides a single Linux server with Node.js and the
 StrongLoop command-line tool installed.
 
 Once the deployment is complete, the LoopBack sample application is available
-in the sls-sample-app sub-directory of your home directory. To access the
+in the loopback-example-app sub-directory of your home directory. To access the
 sample application, navigate to the IP address of the server on port 3000
 (for example, https://1.2.3.4:3000). For more information, see the [LoopBack
 documentation](http://docs.strongloop.com/display/DOC/LoopBack).
@@ -117,7 +117,7 @@ Started](http://docs.strongloop.com/display/DOC/Getting+started#Gettingstarted-C
 
 ```
 slc lb example
-slc cd sls-sample-app
+slc cd loopback-example-app
 slc run .
 ```
 
