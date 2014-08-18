@@ -3,6 +3,7 @@ default['strongloop']['username'] = "strongloop"
 default['strongloop']['password'] = nil
 default['strongloop']['project_name'] = nil
 default['strongloop']['npm_pkgs'] = %w()
+default['strongloop']['datasource'] = nil
 default[:strongloop][:ssl_cert] = nil
 default[:strongloop][:ssl_key] = nil
 default[:strongloop][:ssl_cacert] = nil

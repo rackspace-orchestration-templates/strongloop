@@ -51,7 +51,7 @@ end
 if node['strongloop']['project_name']
   project_path = File.join(home_dir, node['strongloop']['project_name'])
 else # Install the example app
-  project_path = File.join(home_dir, 'sls-sample-app')
+  project_path = File.join(home_dir, 'loopback-example-app')
 end
 
 bash "strongloop_webapp" do
@@ -86,6 +86,7 @@ supervisor_service "strongloop" do
   autorestart true
   user node['strongloop']['username']
   command "slc run #{File.basename(project_path)}"
+  environment "DB" => node['strongloop']['datasource'] if node['strongloop']['datasource']
   stopsignal "INT"
   stopasgroup true
   killasgroup true

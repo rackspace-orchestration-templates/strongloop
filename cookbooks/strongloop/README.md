@@ -32,7 +32,8 @@ Attributes
   If no project name is provided, the example project will be created.
 * `node['strongloop']['npm_pkgs']`: Additional npm packages to install for
   your project. These will be appended to your `packages.json` file.
-
+* `['strongloop']['datasource']`: Backend data store to use. If no value is
+  specified, LoopBack will default to using memory as the data store.
 The following SSL Configuration attributes are optional:
 * `node[:strongloop][:ssl_cert]`: SSL Certificate to configure with `nginx`
 * `node[:strongloop][:ssl_key]`: SSL Private Key to configure with `nginx`
