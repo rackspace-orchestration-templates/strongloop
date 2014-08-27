@@ -119,6 +119,7 @@ resources:
         redis-helper:
           run: { get_param: install_redis }
         run_list: ["recipe[apt]",
+                   "recipe[build-essential]",
                    "recipe[strongloop]",
                    "recipe[strongloop::firewall]",
                    "recipe[redis-helper]"]
