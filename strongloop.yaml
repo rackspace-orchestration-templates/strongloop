@@ -132,18 +132,23 @@ resources:
 
 outputs:
   private_key:
+    description: SSH Private Key
     value: { get_attr: [ssh_key, private_key] }
 
   server_ip:
+    description: Server IP
     value: { get_attr: [strongloop_server, accessIPv4] }
 
   strongloop_username:
+    description: StrongLoop Username
     value: strongloop
 
   strongloop_password:
+    description: StrongLoop Password
     value: { get_attr: [strongloop_password, value] }
 
   strongloop_url:
+    description: StrongLoop URL
     value:
       str_replace:
         template: "http://%server_ip%:3000"
