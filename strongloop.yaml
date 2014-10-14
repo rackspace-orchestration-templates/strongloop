@@ -64,11 +64,13 @@ parameters:
     default: false
 
   kitchen:
+    label: Kitchen
     description: URL for the kitchen to use
     type: string
     default: https://github.com/rackspace-orchestration-templates/strongloop
 
   chef_version:
+    label: Chef Version
     description: Version of chef client to use
     type: string
     default: 11.14.6
