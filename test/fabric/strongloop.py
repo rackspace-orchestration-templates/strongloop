@@ -1,7 +1,7 @@
-from fabric.api import env, run, task
-from envassert import detect, file, group, package, port, process, service, \
+from fabric.api import env, task
+from envassert import detect, file, group, port, process, service, \
     user
-from hot.utils.test import get_artifacts, http_check
+from hot.utils.test import get_artifacts
 
 
 @task
@@ -21,7 +21,8 @@ def check():
     assert process.is_up('supervisord'), 'process supervisord is not running'
     assert process.is_up('node'), 'process node is not running'
 
-    assert service.is_enabled('supervisor'), 'service supervisor is not enabled'
+    assert service.is_enabled('supervisor'), \
+        'service supervisor is not enabled'
 
 
 @task
