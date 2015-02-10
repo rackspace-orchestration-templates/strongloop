@@ -71,3 +71,4 @@ instructions: |
   slc lb model stores
   slc lb model cars
   ```
+user-input-required: true
