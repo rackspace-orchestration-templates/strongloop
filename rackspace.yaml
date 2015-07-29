@@ -72,3 +72,6 @@ instructions: |
   slc lb model cars
   ```
 user-input-required: true
+description: |
+  Single Linux server running the latest version of
+  [StrongLoop](http://strongloop.com).
