@@ -11,9 +11,7 @@ hidden_outputs:
   - private_key
   - strongloop_password
 abstract: |
-  [StrongLoop](http://strongloop.com) Suite is a modern app platform with
-  Node.js, NPM and, tooling for use in production. Backed by professional
-  support plans from StrongLoop.
+  StrongLoop is a system for easily developing REST APIs in Node.js.
 instructions: |
   #### Getting Started
   This deployment provides a single Linux server with Node.js and the
