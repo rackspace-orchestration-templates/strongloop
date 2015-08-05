@@ -1,8 +1,8 @@
 heat_template_version: 2013-05-23
 
 description: |
-  This is a Heat template to deploy a single Linux server running the
-  StrongLoop suite. The example LoopBack application will be setup by default.
+  Single Linux server running the latest version of
+  [StrongLoop](http://strongloop.com).
 
 parameter_groups:
 
